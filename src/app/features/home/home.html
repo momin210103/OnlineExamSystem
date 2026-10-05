@@ -1,20 +1,139 @@
-<h1>{{ title }}</h1>
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="eyebrow"> ONLINE EXAMINATION PLATFORM </span>
 
-<p>{{ description }}</p>
-<p>Exam List</p>
-<h2>Available Exams</h2>
+      <h1>
+        Test Your Knowledge.
+        <span>Achieve Your Goals.</span>
+      </h1>
 
-@for (exam of exams; track exam.id) {
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>
-        {{ exam.title }}
-      </mat-card-title>
-    </mat-card-header>
+      <p>
+        Practice with online exams, improve your knowledge, and track your performance from
+        anywhere.
+      </p>
 
-    <mat-card-content>
-      <p>Duration: {{ exam.duration }} minutes</p>
-      <p>Total Marks: {{ exam.totalMarks }}</p>
-    </mat-card-content>
-  </mat-card>
-}
+      <div class="hero-actions">
+        <a mat-flat-button color="primary" routerLink="/exams">
+          <mat-icon>play_arrow</mat-icon>
+          Start an Exam
+        </a>
+
+        <a mat-stroked-button routerLink="/register"> Create Account </a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <mat-card>
+        <mat-card-content>
+          <mat-icon class="hero-icon"> school </mat-icon>
+
+          <h2>Ready to test yourself?</h2>
+
+          <p>Choose an exam and see how much you know.</p>
+
+          <div class="mini-stat">
+            <strong>50+</strong>
+            <span>Available Exams</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>
+
+<!-- Statistics -->
+<section class="stats-section">
+  <div class="stats-container">
+    <div class="stat">
+      <mat-icon>quiz</mat-icon>
+
+      <div>
+        <strong>50+</strong>
+        <span>Exams</span>
+      </div>
+    </div>
+
+    <div class="stat">
+      <mat-icon>people</mat-icon>
+
+      <div>
+        <strong>1,000+</strong>
+        <span>Students</span>
+      </div>
+    </div>
+
+    <div class="stat">
+      <mat-icon>help_outline</mat-icon>
+
+      <div>
+        <strong>5,000+</strong>
+        <span>Questions</span>
+      </div>
+    </div>
+
+    <div class="stat">
+      <mat-icon>emoji_events</mat-icon>
+
+      <div>
+        <strong>95%</strong>
+        <span>Success Rate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features-section">
+  <div class="section-header">
+    <span class="eyebrow"> WHY ONLINE EXAM? </span>
+
+    <h2>Everything You Need to Improve</h2>
+
+    <p>A simple platform to practice, take exams, and understand your performance.</p>
+  </div>
+
+  <div class="features-grid">
+    <mat-card class="feature-card">
+      <mat-card-content>
+        <mat-icon>quiz</mat-icon>
+
+        <h3>Online Exams</h3>
+
+        <p>Take exams online anytime and from anywhere.</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="feature-card">
+      <mat-card-content>
+        <mat-icon>analytics</mat-icon>
+
+        <h3>Track Progress</h3>
+
+        <p>Monitor your scores and understand your performance.</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="feature-card">
+      <mat-card-content>
+        <mat-icon>bolt</mat-icon>
+
+        <h3>Instant Results</h3>
+
+        <p>Get your exam results immediately after submission.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <h2>Ready to test your knowledge?</h2>
+
+    <p>Create your account and start your first exam today.</p>
+
+    <a mat-flat-button color="primary" routerLink="/register"> Get Started </a>
+  </div>
+</section>
