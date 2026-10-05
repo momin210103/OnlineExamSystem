@@ -1,0 +1,20 @@
+<h1>{{ title }}</h1>
+
+<p>{{ description }}</p>
+<p>Exam List</p>
+<h2>Available Exams</h2>
+
+@for (exam of exams; track exam.id) {
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ exam.title }}
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>Duration: {{ exam.duration }} minutes</p>
+      <p>Total Marks: {{ exam.totalMarks }}</p>
+    </mat-card-content>
+  </mat-card>
+}

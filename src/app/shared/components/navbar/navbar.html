@@ -1,0 +1,72 @@
+<mat-toolbar class="navbar">
+  <!-- Logo -->
+  <a mat-button class="brand" routerLink="/">
+    <mat-icon>school</mat-icon>
+
+    <span>Online Exam</span>
+  </a>
+
+  <!-- Desktop Navigation -->
+  <nav class="desktop-nav">
+    <a
+      mat-button
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Home
+    </a>
+
+    <a mat-button routerLink="/exams" routerLinkActive="active"> Exams </a>
+
+    <a mat-button routerLink="/results" routerLinkActive="active"> Results </a>
+  </nav>
+
+  <!-- Push Login/Register to right -->
+  <span class="spacer"></span>
+
+  <!-- Authentication -->
+  <div class="auth-buttons">
+    <a mat-button routerLink="/login"> Login </a>
+
+    <a mat-flat-button color="primary" routerLink="/register"> Register </a>
+  </div>
+
+  <!-- Mobile Menu Button -->
+  <button
+    mat-icon-button
+    class="mobile-menu-button"
+    [matMenuTriggerFor]="mobileMenu"
+    aria-label="Open navigation menu"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- Mobile Menu -->
+<mat-menu #mobileMenu="matMenu">
+  <button mat-menu-item routerLink="/">
+    <mat-icon>home</mat-icon>
+    <span>Home</span>
+  </button>
+
+  <button mat-menu-item routerLink="/exams">
+    <mat-icon>quiz</mat-icon>
+    <span>Exams</span>
+  </button>
+
+  <button mat-menu-item routerLink="/results">
+    <mat-icon>assessment</mat-icon>
+    <span>Results</span>
+  </button>
+
+  <button mat-menu-item routerLink="/login">
+    <mat-icon>login</mat-icon>
+    <span>Login</span>
+  </button>
+
+  <button mat-menu-item routerLink="/register">
+    <mat-icon>person_add</mat-icon>
+    <span>Register</span>
+  </button>
+</mat-menu>
