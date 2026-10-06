@@ -1,1 +1,79 @@
-<p>register works!</p>
+<div class="register-page">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+    <div class="register-header">
+      <h1>Create Account</h1>
+
+      <p>Create your account to start taking exams.</p>
+    </div>
+
+    <!-- Full Name -->
+
+    <app-form-input
+      label="Full Name"
+      type="text"
+      placeholder="Enter your full name"
+      prefixIcon="person"
+      [required]="true"
+      formControlName="fullName"
+    >
+    </app-form-input>
+
+    <!-- Email -->
+
+    <app-form-input
+      label="Email"
+      type="email"
+      placeholder="Enter your email"
+      prefixIcon="email"
+      [required]="true"
+      formControlName="email"
+    >
+    </app-form-input>
+
+    <!-- Password -->
+
+    <app-form-input
+      label="Password"
+      type="password"
+      placeholder="Enter your password"
+      prefixIcon="lock"
+      [required]="true"
+      [showPasswordToggle]="true"
+      formControlName="password"
+    >
+    </app-form-input>
+
+    <!-- Confirm Password -->
+
+    <app-form-input
+      label="Confirm Password"
+      type="password"
+      placeholder="Confirm your password"
+      prefixIcon="lock"
+      [required]="true"
+      [showPasswordToggle]="true"
+      formControlName="confirmPassword"
+    >
+    </app-form-input>
+
+    <!-- Password mismatch -->
+
+    @if (
+      registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched
+    ) {
+      <div class="error-message">Passwords do not match.</div>
+    }
+
+    <!-- Register Button -->
+
+    <button mat-flat-button color="primary" type="submit">Register</button>
+
+    <!-- Login Link -->
+
+    <p class="login-link">
+      Already have an account?
+
+      <a routerLink="/login"> Login </a>
+    </p>
+  </form>
+</div>
