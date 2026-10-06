@@ -5,6 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { FormInput } from '../../../shared/components/form-input/form-input';
 
@@ -17,6 +18,7 @@ import { FormInput } from '../../../shared/components/form-input/form-input';
     MatCardModule,
     MatIconModule,
     FormInput,
+    MatSnackBarModule,
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',
@@ -27,13 +29,26 @@ export class Login {
 
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
+  constructor(private snackBar: MatSnackBar) {}
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
-
       // this.loginForm.markAllAsTouched();
+
+      this.snackBar.open('Please fix the errors in the form.', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
+
       return;
     }
+
+    this.snackBar.open('Login successful!', 'Close', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
 
     console.log('Login Data:', this.loginForm.value);
   }
