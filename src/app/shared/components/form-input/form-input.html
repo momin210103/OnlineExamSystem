@@ -1,7 +1,5 @@
 <mat-form-field appearance="outline">
-  <mat-label>
-    {{ label }}
-  </mat-label>
+  <mat-label>{{ label }}</mat-label>
 
   @if (prefixIcon) {
     <mat-icon matPrefix>
@@ -11,7 +9,7 @@
 
   <input
     matInput
-    [type]="type"
+    [type]="inputType"
     [placeholder]="placeholder"
     [required]="required"
     [value]="value"
@@ -19,11 +17,24 @@
     (blur)="handleBlur()"
   />
 
-  @if (hasError('required')) {
-    <mat-error> {{ label }} is required </mat-error>
-  } @else if (hasError('email')) {
-    <mat-error> Enter a valid email address </mat-error>
-  } @else if (hasError('minlength')) {
-    <mat-error> {{ label }} must be at least 6 characters </mat-error>
+  @if (showPasswordToggle && type === 'password') {
+    <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+      <mat-icon>
+        {{ passwordVisible ? 'visibility_off' : 'visibility' }}
+      </mat-icon>
+    </button>
   }
 </mat-form-field>
+
+<!-- TEST ERROR -->
+@if (hasError('required')) {
+  <div class="error-message">{{ label }} is required</div>
+}
+
+@if (hasError('email')) {
+  <div class="error-message">Enter a valid email address</div>
+}
+
+@if (hasError('minlength')) {
+  <div class="error-message">{{ label }} must be at least 6 characters</div>
+}

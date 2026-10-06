@@ -21,6 +21,8 @@ export class FormInput implements ControlValueAccessor {
   @Input() placeholder = '';
   @Input() prefixIcon = '';
   @Input() required = false;
+  @Input() showPasswordToggle = false;
+  passwordVisible = false;
 
   value = '';
 
@@ -64,7 +66,26 @@ export class FormInput implements ControlValueAccessor {
 
   hasError(error: string): boolean {
     const control = this.ngControl?.control;
+    console.log({
+      label: this.label,
+      error,
+      control,
+      touched: control?.touched,
+      invalid: control?.invalid,
+      errors: control?.errors,
+    });
 
     return !!(control && control.touched && control.hasError(error));
+  }
+
+  get inputType(): string {
+    if (this.type == 'password') {
+      return this.passwordVisible ? 'text' : 'password';
+    }
+    return this.type;
+  }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
   }
 }
