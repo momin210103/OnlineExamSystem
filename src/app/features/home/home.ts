@@ -29,10 +29,10 @@ export class HomeComponent {
       color: 'indigo',
     },
     {
-      title: 'University Admission',
+      title: 'Admission Preparation',
       description: 'Prepare for admission tests with timed mock exams.',
       icon: 'assignment_ind',
-      route: '/exams/university-admission',
+      route: '/category/adminssion-preparation-packages',
       color: 'green',
     },
   ];
