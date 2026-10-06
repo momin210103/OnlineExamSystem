@@ -30,14 +30,8 @@ export class Login {
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
-      console.log('Form:', this.loginForm);
-      console.log('Form value:', this.loginForm.value);
-      console.log('Form errors:', {
-        email: this.loginForm.controls.email.errors,
-        password: this.loginForm.controls.password.errors,
-      });
 
-      this.loginForm.markAllAsTouched();
+      // this.loginForm.markAllAsTouched();
       return;
     }
 

@@ -66,14 +66,6 @@ export class FormInput implements ControlValueAccessor {
 
   hasError(error: string): boolean {
     const control = this.ngControl?.control;
-    console.log({
-      label: this.label,
-      error,
-      control,
-      touched: control?.touched,
-      invalid: control?.invalid,
-      errors: control?.errors,
-    });
 
     return !!(control && control.touched && control.hasError(error));
   }

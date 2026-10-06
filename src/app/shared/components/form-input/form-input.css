@@ -13,3 +13,45 @@ mat-form-field {
   margin-top: -15px;
   margin-bottom: 12px;
 }
+.password-toggle {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #6b7280;
+
+  border-radius: 50%;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.password-toggle mat-icon {
+  font-size: 21px;
+  width: 21px;
+  height: 21px;
+
+  transition: transform 0.2s ease;
+}
+
+/* Hover */
+.password-toggle:hover {
+  color: #3f51b5;
+  background-color: rgba(63, 81, 181, 0.08);
+}
+
+/* Click */
+.password-toggle:active {
+  transform: scale(0.92);
+}
+
+/* Keyboard focus */
+.password-toggle:focus-visible {
+  outline: 2px solid #3f51b5;
+  outline-offset: 2px;
+}

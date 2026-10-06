@@ -18,7 +18,14 @@
   />
 
   @if (showPasswordToggle && type === 'password') {
-    <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      class="password-toggle"
+      (click)="togglePasswordVisibility()"
+      aria-label="Toggle password visibility"
+    >
       <mat-icon>
         {{ passwordVisible ? 'visibility_off' : 'visibility' }}
       </mat-icon>
