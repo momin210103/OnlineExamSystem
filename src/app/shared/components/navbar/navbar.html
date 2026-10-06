@@ -17,9 +17,21 @@
       Home
     </a>
 
-    <a mat-button routerLink="/exams" routerLinkActive="active"> Exams </a>
+    <button mat-button [matMenuTriggerFor]="examPackagesMenu">
+      Exam Packages
+      <mat-icon>expand_more</mat-icon>
+    </button>
 
-    <a mat-button routerLink="/results" routerLinkActive="active"> Results </a>
+    <mat-menu #examPackagesMenu="matMenu">
+      <button><div class="menu-section-title">Job Preparation</div></button>
+      <br/>
+
+      <button><div class="menu-section-title">Admission Preparation</div></button>
+    </mat-menu>
+
+    <a mat-button routerLink="/results" routerLinkActive="active"> Free Practice </a>
+
+    <a mat-button>Leader Board</a>
   </nav>
 
   <!-- Push Login/Register to right -->
@@ -52,12 +64,12 @@
 
   <button mat-menu-item routerLink="/exams">
     <mat-icon>quiz</mat-icon>
-    <span>Exams</span>
+    <span>Exam Packages</span>
   </button>
 
   <button mat-menu-item routerLink="/results">
     <mat-icon>assessment</mat-icon>
-    <span>Results</span>
+    <span>Free Practice</span>
   </button>
 
   <button mat-menu-item routerLink="/login">

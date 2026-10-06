@@ -1,12 +1,12 @@
-<!-- Hero Section -->
+<!-- Hero -->
 <section class="hero">
   <div class="hero-content">
     <div class="hero-text">
-      <span class="eyebrow"> ONLINE EXAMINATION PLATFORM </span>
+      <span class="eyebrow">ONLINE EXAMINATION PLATFORM</span>
 
       <h1>
         Test Your Knowledge.
-        <span>Achieve Your Goals.</span>
+        <span class="highlight">Achieve Your Goals.</span>
       </h1>
 
       <p>
@@ -15,27 +15,25 @@
       </p>
 
       <div class="hero-actions">
-        <a mat-flat-button color="primary" routerLink="/exams">
-          <mat-icon>play_arrow</mat-icon>
-          Live Exam
+        <a mat-flat-button class="btn-primary" routerLink="/exams">
+          <mat-icon aria-hidden="true">play_arrow</mat-icon>
+          Browse Exams
         </a>
-
-        <a mat-stroked-button routerLink="/register"> Create Account </a>
+        <a mat-stroked-button routerLink="/register">Create Account</a>
       </div>
     </div>
 
     <div class="hero-card">
-      <mat-card>
+      <mat-card appearance="outlined">
         <mat-card-content>
-          <mat-icon class="hero-icon"> school </mat-icon>
-
+          <div class="hero-icon-wrap">
+            <mat-icon aria-hidden="true">school</mat-icon>
+          </div>
           <h2>Ready to test yourself?</h2>
-
           <p>Choose an exam and see how much you know.</p>
-
           <div class="mini-stat">
-            <strong>50+</strong>
-            <span>Available Exams</span>
+            <strong>Free to start</strong>
+            <span>No credit card needed</span>
           </div>
         </mat-card-content>
       </mat-card>
@@ -43,87 +41,69 @@
   </div>
 </section>
 
-<!-- Statistics -->
+<!-- Stats -->
 <section class="stats-section">
   <div class="stats-container">
-    <div class="stat">
-      <mat-icon>quiz</mat-icon>
-
-      <div>
-        <strong>50+</strong>
-        <span>Exams</span>
+    @for (s of stats; track s.label) {
+      <div class="stat">
+        <mat-icon aria-hidden="true">{{ s.icon }}</mat-icon>
+        <div>
+          <strong>{{ s.value }}</strong>
+          <span>{{ s.label }}</span>
+        </div>
       </div>
-    </div>
+    }
+  </div>
+</section>
 
-    <div class="stat">
-      <mat-icon>people</mat-icon>
+<!-- Exam Categories -->
+<section class="section">
+  <div class="section-header">
+    <span class="eyebrow">EXAM CATEGORIES</span>
+    <h2>পরীক্ষার ক্যাটাগরি</h2>
+    <p>আপনার লক্ষ্য অনুযায়ী ক্যাটাগরি বেছে নিন</p>
+  </div>
 
-      <div>
-        <strong>1,000+</strong>
-        <span>Students</span>
-      </div>
-    </div>
-
-    <div class="stat">
-      <mat-icon>help_outline</mat-icon>
-
-      <div>
-        <strong>5,000+</strong>
-        <span>Questions</span>
-      </div>
-    </div>
-
-    <div class="stat">
-      <mat-icon>emoji_events</mat-icon>
-
-      <div>
-        <strong>95%</strong>
-        <span>Success Rate</span>
-      </div>
-    </div>
+  <div class="grid grid-categories">
+    @for (cat of categories; track cat.title) {
+      <a [routerLink]="cat.route" class="card-link">
+        <mat-card class="card" appearance="outlined">
+          <mat-card-content>
+            <div class="icon-wrap" [ngClass]="cat.color">
+              <mat-icon aria-hidden="true">{{ cat.icon }}</mat-icon>
+            </div>
+            <h3>{{ cat.title }}</h3>
+            <p>{{ cat.description }}</p>
+            <span class="card-more">
+              Explore <mat-icon class="arrow" aria-hidden="true">arrow_forward</mat-icon>
+            </span>
+          </mat-card-content>
+        </mat-card>
+      </a>
+    }
   </div>
 </section>
 
 <!-- Features -->
-<section class="features-section">
+<section class="section section-alt">
   <div class="section-header">
-    <span class="eyebrow"> WHY ONLINE EXAM? </span>
-
+    <span class="eyebrow">WHY ONLINE EXAM?</span>
     <h2>Everything You Need to Improve</h2>
-
     <p>A simple platform to practice, take exams, and understand your performance.</p>
   </div>
 
-  <div class="features-grid">
-    <mat-card class="feature-card">
-      <mat-card-content>
-        <mat-icon>quiz</mat-icon>
-
-        <h3>Online Exams</h3>
-
-        <p>Take exams online anytime and from anywhere.</p>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="feature-card">
-      <mat-card-content>
-        <mat-icon>analytics</mat-icon>
-
-        <h3>Track Progress</h3>
-
-        <p>Monitor your scores and understand your performance.</p>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="feature-card">
-      <mat-card-content>
-        <mat-icon>bolt</mat-icon>
-
-        <h3>Instant Results</h3>
-
-        <p>Get your exam results immediately after submission.</p>
-      </mat-card-content>
-    </mat-card>
+  <div class="grid grid-features">
+    @for (f of features; track f.title) {
+      <mat-card class="card" appearance="outlined">
+        <mat-card-content>
+          <div class="icon-wrap indigo">
+            <mat-icon aria-hidden="true">{{ f.icon }}</mat-icon>
+          </div>
+          <h3>{{ f.title }}</h3>
+          <p>{{ f.text }}</p>
+        </mat-card-content>
+      </mat-card>
+    }
   </div>
 </section>
 
@@ -131,9 +111,7 @@
 <section class="cta-section">
   <div class="cta-content">
     <h2>Ready to test your knowledge?</h2>
-
     <p>Create your account and start your first exam today.</p>
-
-    <a mat-flat-button color="primary" routerLink="/register"> Get Started </a>
+    <a mat-flat-button class="btn-light" routerLink="/register">Get Started</a>
   </div>
 </section>
