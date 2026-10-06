@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -24,12 +24,16 @@ import { FormInput } from '../../../shared/components/form-input/form-input';
   styleUrl: './login.css',
 })
 export class Login {
+  constructor(
+    private snackBar: MatSnackBar,
+    private router : Router
+
+  ) {}
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
 
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
-  constructor(private snackBar: MatSnackBar) {}
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
@@ -49,6 +53,7 @@ export class Login {
       horizontalPosition: 'right',
       verticalPosition: 'top',
     });
+    this.router.navigate(['/student/dashboard']);
 
     console.log('Login Data:', this.loginForm.value);
   }
