@@ -1,0 +1,59 @@
+<!-- job-preparation.component.html -->
+<section class="page-header">
+  <a routerLink="/" class="back-link">
+    <mat-icon aria-hidden="true">arrow_back</mat-icon> Back to Home
+  </a>
+  <span class="eyebrow">JOB PREPARATION</span>
+  <h1>Choose Your Package</h1>
+  <p>Pick a package that matches your target job exam and start practicing.</p>
+</section>
+
+<section class="packages-section">
+  <div class="packages-grid">
+    @for (pkg of packages; track pkg.id) {
+      <mat-card class="package-card" [class.popular]="pkg.popular" appearance="outlined">
+        @if (pkg.popular) {
+          <span class="badge">Most Popular</span>
+        }
+
+        <mat-card-content>
+          <div class="icon-wrap">
+            <mat-icon aria-hidden="true">{{ pkg.icon }}</mat-icon>
+          </div>
+
+          <h3>{{ pkg.name }}</h3>
+          <p class="desc">{{ pkg.description }}</p>
+
+          <div class="price">
+            @if (pkg.price === 0) {
+              <strong>Free</strong>
+            } @else {
+              <strong>৳{{ pkg.price }}</strong>
+            }
+            <span>/ {{ pkg.duration }}</span>
+          </div>
+
+          <div class="meta">
+            <mat-icon aria-hidden="true">quiz</mat-icon>
+            {{ pkg.examCount }} exams
+          </div>
+
+          <ul class="features">
+            @for (f of pkg.features; track f) {
+              <li>
+                <mat-icon aria-hidden="true">check_circle</mat-icon>
+                {{ f }}
+              </li>
+            }
+          </ul>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <a mat-flat-button class="btn-primary" [routerLink]="['/exams/job-preparation', pkg.id]">
+            {{ pkg.price === 0 ? 'Start Free' : 'View Package' }}
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+</section>
