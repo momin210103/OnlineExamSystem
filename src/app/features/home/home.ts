@@ -25,14 +25,14 @@ export class HomeComponent {
       title: 'Job Preparation',
       description: 'Practice with model tests designed for job exams.',
       icon: 'menu_book',
-      route: '/exams/job-preparation',
+      route: 'category/job-preparation-packages',
       color: 'indigo',
     },
     {
       title: 'Admission Preparation',
       description: 'Prepare for admission tests with timed mock exams.',
       icon: 'assignment_ind',
-      route: '/category/adminssion-preparation-packages',
+      route: 'category/admission-preparation-packages',
       color: 'green',
     },
   ];

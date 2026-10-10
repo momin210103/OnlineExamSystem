@@ -10,7 +10,7 @@
 
 <section class="packages-section">
   <div class="packages-grid">
-    @for (pkg of packages; track pkg.id) {
+    @for (pkg of packages(); track pkg.id) {
       <mat-card class="package-card" [class.popular]="pkg.popular" appearance="outlined">
         @if (pkg.popular) {
           <span class="badge">Most Popular</span>
@@ -35,7 +35,7 @@
 
           <div class="meta">
             <mat-icon aria-hidden="true">quiz</mat-icon>
-            {{ pkg.examCount }} exams
+            {{ pkg.exams.length }} exams
           </div>
 
           <ul class="features">
@@ -49,7 +49,11 @@
         </mat-card-content>
 
         <mat-card-actions>
-          <a mat-flat-button class="btn-primary" [routerLink]="['/exams/job-preparation', pkg.id]">
+          <a
+            mat-flat-button
+            class="btn-primary"
+            [routerLink]="['/package', 'job-preparation', pkg.id]"
+          >
             {{ pkg.price === 0 ? 'Start Free' : 'View Package' }}
           </a>
         </mat-card-actions>

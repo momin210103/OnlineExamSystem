@@ -5,6 +5,7 @@ import { Register } from './features/auth/register/register';
 import { Dashboard } from './features/student/dashboard/dashboard';
 import { AdmissionPackages } from './features/admission/admission-packages/admission-packages';
 import { JobPackages } from './features/job/job-packages/job-packages';
+import { PackageDetail } from './features/package-detail/package-detail';
 
 export const routes: Routes = [
   {
@@ -24,11 +25,15 @@ export const routes: Routes = [
     component: Dashboard,
   },
   {
-    path: 'category/adminssion-preparation-packages',
+    path: 'category/admission-preparation-packages',
     component: AdmissionPackages,
   },
   {
     path: 'category/job-preparation-packages',
     component: JobPackages,
   },
+  {
+    path: 'package/:category/:packageId',
+    component: PackageDetail,
+  }
 ];

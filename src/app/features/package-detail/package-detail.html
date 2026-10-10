@@ -1,0 +1,118 @@
+<!-- package-detail.component.html -->
+@if (pkg(); as p) {
+  <section class="page-header">
+    <div class="header-inner">
+      <nav class="breadcrumb">
+        <a routerLink="/">Home</a>
+        <mat-icon aria-hidden="true">chevron_right</mat-icon>
+        <a [routerLink]="['/exams', p.category]">{{ p.categoryLabel }}</a>
+        <mat-icon aria-hidden="true">chevron_right</mat-icon>
+        <span>{{ p.name }}</span>
+      </nav>
+
+      <div class="header-main">
+        <div class="header-text">
+          <span class="eyebrow">{{ p.categoryLabel | uppercase }}</span>
+          <h1>{{ p.name }}</h1>
+          <p>{{ p.description }}</p>
+
+          <div class="stats">
+            <div class="stat">
+              <mat-icon aria-hidden="true">quiz</mat-icon> {{ p.exams.length }} Exams
+            </div>
+            <div class="stat">
+              <mat-icon aria-hidden="true">schedule</mat-icon> {{ p.duration }} access
+            </div>
+            <div class="stat">
+              <mat-icon aria-hidden="true">grade</mat-icon> {{ totalMarks() }} Total Marks
+            </div>
+          </div>
+        </div>
+
+        <mat-card class="buy-card" appearance="outlined">
+          <mat-card-content>
+            <div class="price">
+              @if (p.price === 0) {
+                <strong>Free</strong>
+              } @else {
+                <strong>৳{{ p.price }}</strong>
+                <span>/ {{ p.duration }}</span>
+              }
+            </div>
+
+            @if (p.price === 0) {
+              <p class="note">সব পরীক্ষা সম্পূর্ণ ফ্রি</p>
+            } @else if (purchased()) {
+              <p class="note success">
+                <mat-icon aria-hidden="true">check_circle</mat-icon> প্যাকেজ আনলক হয়েছে
+              </p>
+            } @else {
+              <button mat-flat-button class="btn-primary" (click)="buy()">
+                <mat-icon aria-hidden="true">lock_open</mat-icon>
+                Unlock Package
+              </button>
+              <p class="note">প্রথম ২টা পরীক্ষা ফ্রি দেখতে পারবেন</p>
+            }
+
+            <ul class="features">
+              @for (f of p.features; track f) {
+                <li>
+                  <mat-icon aria-hidden="true">check_circle</mat-icon>
+                  {{ f }}
+                </li>
+              }
+            </ul>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <section class="exams-section">
+    <h2>
+      Exam List <span class="count">({{ p.exams.length }})</span>
+    </h2>
+
+    <div class="exam-list">
+      @for (exam of p.exams; track exam.id; let i = $index) {
+        <mat-card class="exam-row" appearance="outlined" [class.locked]="!canStart(exam)">
+          <div class="exam-no">{{ i + 1 }}</div>
+
+          <div class="exam-info">
+            <h3>
+              {{ exam.title }}
+              @if (exam.isFree && p.price > 0) {
+                <span class="tag-free">FREE</span>
+              }
+            </h3>
+            <div class="exam-meta">
+              <span
+                ><mat-icon aria-hidden="true">help_outline</mat-icon>
+                {{ exam.questions }} Questions</span
+              >
+              <span><mat-icon aria-hidden="true">schedule</mat-icon> {{ exam.duration }} min</span>
+              <span><mat-icon aria-hidden="true">grade</mat-icon> {{ exam.marks }} Marks</span>
+            </div>
+          </div>
+
+          @if (canStart(exam)) {
+            <a mat-flat-button class="btn-primary" [routerLink]="['/exam', exam.id]">
+              <mat-icon aria-hidden="true">play_arrow</mat-icon> Start Exam
+            </a>
+          } @else {
+            <button mat-stroked-button disabled>
+              <mat-icon aria-hidden="true">lock</mat-icon> Locked
+            </button>
+          }
+        </mat-card>
+      }
+    </div>
+  </section>
+} @else {
+  <section class="not-found">
+    <mat-icon aria-hidden="true">search_off</mat-icon>
+    <h2>Package not found</h2>
+    <p>এই প্যাকেজটি খুঁজে পাওয়া যায়নি।</p>
+    <a mat-flat-button class="btn-primary" routerLink="/">Back to Home</a>
+  </section>
+}
