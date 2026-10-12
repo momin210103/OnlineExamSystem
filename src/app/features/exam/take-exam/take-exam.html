@@ -56,7 +56,7 @@
           *ngFor="let option of currentQuestion.options; let i = index"
           [class.selected]="currentQuestion.selectedAnswer === i"
         >
-          <!-- <strong>{{ ['A', 'B', 'C', 'D'][i] }}</strong> -->
+          <strong>{{ ['ক', 'খ', 'গ', 'ঘ'][i] }}</strong>
           <span class="option-text">{{ option }}</span>
         </div>
       </div>
@@ -81,18 +81,20 @@
 
     <!-- Right: OMR Sheet -->
     <section class="omr-panel">
-      <div class="omr-heading">
-        <h2>
-          <mat-icon>grid_view</mat-icon>
-          OMR Answer Sheet
-        </h2>
-      </div>
+      <div class="omr-header">
+        <div class="omr-heading">
+          <h2>
+            <mat-icon>grid_view</mat-icon>
+            OMR Answer Sheet
+          </h2>
+        </div>
 
-      <div class="status-legend">
-        <span><i class="dot current-dot"></i> Current</span>
-        <span><i class="dot answered-dot"></i> Answered</span>
-        <span><i class="dot unanswered-dot"></i> Not Answered</span>
-        <span><i class="dot marked-dot"></i> Marked</span>
+        <div class="status-legend">
+          <span><i class="dot current-dot"></i> Current</span>
+          <span><i class="dot answered-dot"></i> Answered</span>
+          <span><i class="dot unanswered-dot"></i> Not Answered</span>
+          <span><i class="dot marked-dot"></i> Marked</span>
+        </div>
       </div>
 
       <div class="omr-grid">

@@ -118,8 +118,12 @@
 
 .question-panel,
 .omr-panel {
+  --panel-pad: 16px;
   min-width: 0;
-  padding: 22px;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--panel-pad);
   background: white;
   border: 1px solid #e1eaf3;
   border-radius: 14px;
@@ -129,6 +133,42 @@
 .question-panel {
   display: flex;
   flex-direction: column;
+}
+
+/* OMR sheet scrolls independently of the question panel */
+.omr-panel {
+  max-height: calc(100vh - 140px);
+  max-height: calc(100dvh - 140px);
+  align-self: start;
+  overscroll-behavior: contain;
+  padding-top: 0;
+}
+
+/* Firefox only */
+@supports not selector(::-webkit-scrollbar) {
+  .omr-panel {
+    scrollbar-width: thin;
+    scrollbar-color: #b8c4d3 #f1f5f9;
+  }
+}
+
+/* Chrome, Edge and Safari scrollbar */
+.omr-panel::-webkit-scrollbar {
+  width: 7px;
+}
+
+.omr-panel::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+
+.omr-panel::-webkit-scrollbar-thumb {
+  background: #b8c4d3;
+  border-radius: 8px;
+}
+
+.omr-panel::-webkit-scrollbar-thumb:hover {
+  background: #8493a7;
 }
 
 .question-top {
@@ -166,8 +206,8 @@
 }
 
 .question-content {
-  flex: 1;
-  padding: 34px 0;
+  flex: 0 0 auto;
+  padding: 16px 0 10px;
 }
 
 .question-content h3 {
@@ -237,7 +277,7 @@
 
 .question-navigation {
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   padding-top: 16px;
   border-top: 1px solid #e4ebf2;
 }
@@ -247,8 +287,19 @@
   border-radius: 8px;
 }
 
+/* ===== Fixed OMR header (title + legend) ===== */
+.omr-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: calc(var(--panel-pad) * -1) calc(var(--panel-pad) * -1) 12px;
+  padding: var(--panel-pad) var(--panel-pad) 12px;
+  background: #fff;
+  border-bottom: 1px solid #e4ebf2;
+}
+
 .omr-heading {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .omr-heading h2 {
@@ -267,7 +318,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 0;
   color: #475569;
   font-size: 12px;
 }
@@ -410,6 +461,10 @@
   .omr-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .omr-panel {
+    max-height: 600px;
+  }
 }
 
 /* Mobile */
@@ -452,9 +507,14 @@
     gap: 12px;
   }
 
-  .question-panel,
-  .omr-panel {
+  .question-panel {
     padding: 15px;
+  }
+
+  .omr-panel {
+    --panel-pad: 12px;
+    max-height: 60vh;
+    max-height: 60dvh;
   }
 
   .question-content {
@@ -480,26 +540,6 @@
     gap: 6px;
   }
 
-  .omr-question {
-    gap: 3px;
-    padding: 5px 3px;
-  }
-
-  .question-number {
-    flex-basis: 24px;
-    font-size: 11px;
-  }
-
-  .bubbles {
-    gap: 2px;
-  }
-
-  .bubble {
-    width: 20px;
-    height: 20px;
-    font-size: 10px;
-  }
-
   .status-legend {
     gap: 9px;
   }
@@ -508,34 +548,11 @@
     font-size: 18px;
   }
 
-  .omr-question {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    min-width: 0;
-    min-height: 43px;
-    padding: 6px 8px;
-    border: 1px solid #f0a0a2;
-    background: #fff;
-  }
-
-  .omr-question:nth-child(4n + 2),
-  .omr-question:nth-child(4n + 3) {
-    background: #fff1f1;
-  }
-
-  .omr-question.current {
-    outline: 2px solid #818cf8;
-    outline-offset: -2px;
-  }
-
   .omr-question.marked {
     border-color: #e6a100;
   }
 
   .question-number {
-    flex: 0 0 30px;
     padding: 4px 0;
     border: 0;
     background: transparent;
@@ -545,32 +562,17 @@
     cursor: pointer;
   }
 
-  .bubbles {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 5px;
-    flex: 1;
-  }
-
   .bubble {
-    display: grid;
-    place-items: center;
     width: 26px;
     height: 26px;
-    max-width: 100%;
-    margin: auto;
     padding: 0;
-    border: 1px solid #aeb8c5;
-    border-radius: 50%;
-    background: white;
-    color: #17243a;
     font: inherit;
     font-size: 12px;
     cursor: pointer;
   }
 
   .bubble:hover {
-    border-color: #e5252b;
+    border-color: black;
     background: #ffe4e5;
   }
 
@@ -592,8 +594,8 @@
   }
 
   .bubble.filled:disabled {
-    background: #e5252b;
-    border-color: #e5252b;
+    background: black;
+    border-color: black;
     color: #fff;
   }
 }
