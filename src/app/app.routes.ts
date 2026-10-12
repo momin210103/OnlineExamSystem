@@ -6,6 +6,7 @@ import { Dashboard } from './features/student/dashboard/dashboard';
 import { AdmissionPackages } from './features/admission/admission-packages/admission-packages';
 import { JobPackages } from './features/job/job-packages/job-packages';
 import { PackageDetail } from './features/package-detail/package-detail';
+import { TakeExam } from './features/exam/take-exam/take-exam';
 
 export const routes: Routes = [
   {
@@ -35,5 +36,9 @@ export const routes: Routes = [
   {
     path: 'package/:category/:packageId',
     component: PackageDetail,
+  },
+  {
+    path: 'exam/take-exam',
+    component:TakeExam,
   }
 ];

@@ -1,0 +1,145 @@
+<div class="exam-page">
+  <!-- Top Header -->
+  <header class="exam-header">
+    <div class="exam-title">
+      <div class="brand-icon">
+        <mat-icon>school</mat-icon>
+      </div>
+
+      <div>
+        <h1>University Admission Mock Test</h1>
+        <p>Total Questions: {{ questions.length }} | Duration: 60 Minutes | Subject: General</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <div class="timer">
+        <mat-icon>schedule</mat-icon>
+        <div>
+          <small>Time Left</small>
+          <strong>{{ formattedTime }}</strong>
+        </div>
+      </div>
+
+      <button mat-flat-button class="end-button" [disabled]="submitted" (click)="submitExam()">
+        <mat-icon>flag</mat-icon>
+        End Exam
+      </button>
+    </div>
+  </header>
+
+  <main class="exam-layout">
+    <!-- Left: Question Panel -->
+    <section class="question-panel">
+      <div class="question-top">
+        <h2>
+          Question
+          <span>{{ (currentIndex + 1).toString().padStart(2, '0') }}</span>
+          / {{ questions.length }}
+        </h2>
+
+        <button
+          class="review-button"
+          [class.is-marked]="currentQuestion.markedForReview"
+          (click)="toggleReview()"
+        >
+          <mat-icon>bookmark_border</mat-icon>
+          {{ currentQuestion.markedForReview ? 'Marked for Review' : 'Mark for Review' }}
+        </button>
+      </div>
+
+      <div class="question-content">
+        <h3>{{ currentQuestion.question }}</h3>
+
+        <div
+          class="option"
+          *ngFor="let option of currentQuestion.options; let i = index"
+          [class.selected]="currentQuestion.selectedAnswer === i"
+        >
+          <!-- <strong>{{ ['A', 'B', 'C', 'D'][i] }}</strong> -->
+          <span class="option-text">{{ option }}</span>
+        </div>
+      </div>
+
+      <div class="question-navigation">
+        <button mat-stroked-button (click)="previousQuestion()" [disabled]="currentIndex === 0">
+          <mat-icon>arrow_back</mat-icon>
+          Previous
+        </button>
+
+        <button
+          mat-flat-button
+          class="next-button"
+          (click)="nextQuestion()"
+          [disabled]="currentIndex === questions.length - 1"
+        >
+          Next
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+    </section>
+
+    <!-- Right: OMR Sheet -->
+    <section class="omr-panel">
+      <div class="omr-heading">
+        <h2>
+          <mat-icon>grid_view</mat-icon>
+          OMR Answer Sheet
+        </h2>
+      </div>
+
+      <div class="status-legend">
+        <span><i class="dot current-dot"></i> Current</span>
+        <span><i class="dot answered-dot"></i> Answered</span>
+        <span><i class="dot unanswered-dot"></i> Not Answered</span>
+        <span><i class="dot marked-dot"></i> Marked</span>
+      </div>
+
+      <div class="omr-grid">
+        <div
+          *ngFor="let question of questions; let i = index"
+          class="omr-question"
+          [ngClass]="getQuestionStatus(i)"
+        >
+          <!-- Question number: navigation only -->
+          <button
+            type="button"
+            class="question-number"
+            (click)="goToQuestion(i)"
+            [attr.aria-label]="'Go to question ' + (i + 1)"
+          >
+            {{ (i + 1).toString().padStart(2, '0') }}
+          </button>
+
+          <!-- Click bubbles here to answer -->
+          <div class="bubbles">
+            <button
+              type="button"
+              *ngFor="let label of optionLabels; let j = index"
+              class="bubble"
+              [class.filled]="question.selectedAnswer === j"
+              [disabled]="question.selectedAnswer !== null"
+              [attr.aria-label]="'Question ' + (i + 1) + ', option ' + label"
+              [attr.aria-pressed]="question.selectedAnswer === j"
+              (click)="goToQuestion(i); selectAnswer(j)"
+            >
+              {{ label }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="omr-summary">
+        <span
+          >Answered: <strong>{{ answeredCount }}</strong></span
+        >
+        <span
+          >Remaining: <strong>{{ unansweredCount }}</strong></span
+        >
+        <span
+          >Marked: <strong>{{ markedCount }}</strong></span
+        >
+      </div>
+    </section>
+  </main>
+</div>
