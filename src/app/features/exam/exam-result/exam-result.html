@@ -1,0 +1,57 @@
+<div class="result-page" *ngIf="result; else noResult">
+  <section class="result-card">
+    <div class="result-icon">✓</div>
+
+    <h1>Exam Result</h1>
+    <p class="subtitle">Your examination summary</p>
+
+    <div class="score">
+      <h2>{{ result.score | number: '1.2-2' }}</h2>
+      <p>out of {{ result.totalMarks }} marks</p>
+      <div class="percentage">{{ result.percentage }}%</div>
+      <div>{{ result.obtainedMarks }}</div>
+    </div>
+
+    <div class="result-grid">
+      <div class="result-item">
+        <span>Total Questions</span>
+        <strong>{{ result.totalQuestions }}</strong>
+      </div>
+
+      <div class="result-item">
+        <span>Answered</span>
+        <strong>{{ result.answered }}</strong>
+      </div>
+
+      <div class="result-item correct">
+        <span>Correct</span>
+        <strong>{{ result.correct }}</strong>
+      </div>
+
+      <div class="result-item wrong">
+        <span>Wrong</span>
+        <strong>{{ result.wrong }}</strong>
+      </div>
+
+      <div class="result-item unanswered">
+        <span>Unanswered</span>
+        <strong>{{ result.unanswered }}</strong>
+      </div>
+
+      <div class="result-item">
+        <span>Negative Marks</span>
+        <strong>{{ result.negativeMarks }}</strong>
+      </div>
+    </div>
+
+    <button type="button" (click)="goHome()">Back to Home</button>
+  </section>
+</div>
+
+<ng-template #noResult>
+  <section class="result-card">
+    <h2>Result not found</h2>
+    <p>Please submit an exam to view your result.</p>
+    <a routerLink="/">Back to Home</a>
+  </section>
+</ng-template>

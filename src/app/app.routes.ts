@@ -39,6 +39,11 @@ export const routes: Routes = [
   },
   {
     path: 'exam/take-exam',
-    component:TakeExam,
-  }
+    component: TakeExam,
+  },
+  {
+    path: 'exam/result',
+    loadComponent: () =>
+      import('./features/exam/exam-result/exam-result').then((m) => m.ExamResult),
+  },
 ];
